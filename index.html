@@ -51,11 +51,18 @@
             const elem = document.documentElement;
             if (elem.requestFullscreen) {
                 await elem.requestFullscreen();
-            } else if (elem.webkitRequestFullscreen) { /* Safari */
+            } else if (elem.webkitRequestFullscreen) {          // Safari, older Chrome
                 await elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) { /* IE11 */
+            } else if (elem.mozRequestFullScreen) {              // Firefox
+                await elem.mozRequestFullScreen();
+            } else if (elem.msRequestFullscreen) {               // IE11, Edge (EdgeHTML)
                 await elem.msRequestFullscreen();
-            }
+            } else if (elem.webkitEnterFullscreen) {             // iOS Safari (video only, rare for elements)
+                elem.webkitEnterFullscreen();
+            } else if (elem.oRequestFullscreen) {                // Opera old prefix (rare)
+                await elem.oRequestFullscreen();
+            } else if (elem.khtmlRequestFullScreen) {            // Konqueror old prefix (very rare)
+                await elem.khtmlRequestFullScreen();
 
             // Now you can start your simulation logic here if needed
             // e.g., startSimulation();
