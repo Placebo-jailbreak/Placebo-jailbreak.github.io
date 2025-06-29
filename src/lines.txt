@@ -151,5 +151,4 @@ __________________
 [*] Installed execve hook
 [*] Found APFS snapshot rename flag check
 [*] Patching APFS snapshot for this boot
-[*] Booting... mapping... radishing...
 [✓] done!
