@@ -1,0 +1,44 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  background: black;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: monospace;
+}
+
+.phone-screen {
+  background: black;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+#terminal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 4vw;
+  color: white;
+  font-size: 3.5vw;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+  z-index: 1;
+}
+
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30vw;         /* Bigger on small screens */
+  max-width: 200px;    /* Cap it for very large screens */
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.95;
+}

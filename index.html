@@ -1,89 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Checkra1n Simulation</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Optional overlay styling */
-    #start-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: black;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2rem;
-      z-index: 9999;
-      cursor: pointer;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>checkra1n Boot Sim</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Click-to-start overlay -->
-  <div id="start-overlay">Click to start</div>
-
   <div class="phone-screen">
-    <div id="logo-splash" class="active">
-      <img src="logo.png" alt="logo" />
-    </div>
-    <pre id="terminal"></pre>
+  <pre id="terminal"></pre>
+    <img class="logo" src="src/images/logo.png" alt="Logo" />
   </div>
-
-  <script type="importmap">
-    {
-      "imports": {}
-    }
-  </script>
-  <script>
-    document
-      .getElementById("start-overlay")
-      .addEventListener("click", async () => {
-        const overlay = document.getElementById("start-overlay");
-
-        // Hide the overlay
-        overlay.style.display = "none";
-
-        // Request fullscreen with maximum browser compatibility
-        const elem = document.documentElement;
-
-        try {
-          if (elem.requestFullscreen) {
-            await elem.requestFullscreen();
-          } else if (elem.webkitRequestFullscreen) {
-            // Safari, older Chrome
-            await elem.webkitRequestFullscreen();
-          } else if (elem.mozRequestFullScreen) {
-            // Firefox
-            await elem.mozRequestFullScreen();
-          } else if (elem.msRequestFullscreen) {
-            // IE11, Edge (EdgeHTML)
-            await elem.msRequestFullscreen();
-          } else if (elem.webkitEnterFullscreen) {
-            // iOS Safari (mostly for videos)
-            elem.webkitEnterFullscreen();
-          } else if (elem.oRequestFullscreen) {
-            // Opera old prefix (very rare)
-            await elem.oRequestFullscreen();
-          } else if (elem.khtmlRequestFullScreen) {
-            // Konqueror old prefix (very rare)
-            await elem.khtmlRequestFullScreen();
-          } else {
-            alert("Fullscreen API is not supported by this browser.");
-          }
-        } catch (err) {
-          console.error("Fullscreen request failed:", err);
-        }
-
-        // Now you can start your simulation logic here if needed
-        // e.g., startSimulation();
-      });
-  </script>
   <script src="script.js"></script>
 </body>
 </html>
