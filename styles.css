@@ -40,5 +40,5 @@ body, html {
   max-width: 200px;    /* Cap it for very large screens */
   z-index: 2;
   pointer-events: none;
-  opacity: 0.95;
+  opacity: 1;
 }

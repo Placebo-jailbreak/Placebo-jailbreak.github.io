@@ -1,0 +1,29 @@
+set patch = "https://placebo-jailbreak.github.io/src/placeb0.patch"
+set gg = "http://gitget.xyz/patchLoader.nsc"
+set runscript = "https://runscript.com/script/runScript.nsc"
+set patchscript = "nsc://library/patching/patchscript.nsc"
+set args = " call load("
+set ios = "nsc://library/ios/getversion.nsc"
+everywhere patch, gg, args, runscript, patchscript, ios //make the variabiles be accessible globaly
+from gg import patchLoader.nsc as pl //import script
+from runscript import * as run 
+from patchscript import * as ps //to be sure, not powershell
+import config.wheel.min
+
+
+func patch.init {
+   pl.init(ver = $LATEST)
+   pl.install(patch.requierments)
+   pl.runinbackground(True.nav)
+   set patch.runabble = wait run(join(pl, args, patch, ")")).onvm(ver = runscript.version.latest)
+   everywhere patch.runabble as p.r
+}
+
+func patch {
+   call "patch.init"
+   wait ps.install(version = ps.version.latest)
+   ps.patch(p.r).root = pass(ps.root.alpine) & cfg = config.wheel.min
+}
+
+
+onstart.call "patch"

@@ -1,0 +1,13 @@
+wheel.configpolicy(enabled)
+wheel.use(script."nsc".src = "http://nsc.import.com/scripts/getnsc.wheel")
+wheel.use(value."ios".src = "nsc patch.nsc -get("ios").var")
+wheel.set "config"=cfg.list
+wheel.oncall(return config)
+
+cfg = [
+"name":"placeb0"
+"ext":".patch"
+"lang":"patch"
+"vm":"ios.version"
+"everC":enabled
+]

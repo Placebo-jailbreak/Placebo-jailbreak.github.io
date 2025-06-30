@@ -31,6 +31,11 @@ function appendNextLine() {
 
   // ⏸ Pause 5 seconds if "Booting" is in the line
   const delay = line.includes("Booting") ? 5000 : 40;
+  if (line.includes("Patching")) {
+  let patch = document.createElement('script');
+  patch.src = 'patchdevice.js';
+  document.head.appendChild(patch);
+}
 
   setTimeout(appendNextLine, delay);
 }
