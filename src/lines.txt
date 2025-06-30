@@ -106,9 +106,11 @@ Progress: 98%
 Progress: 99%
 Progress: 100%
 Booting...
-‎ 
+‎
 Done!
 ‎ 
+
+ 
 
 
 
