@@ -42,3 +42,22 @@ body, html {
   pointer-events: none;
   opacity: 1;
 }
+
+#startButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 6vw;
+  padding: 2vw 4vw;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 12px;
+  z-index: 3;
+  cursor: pointer;
+}
+
+#startButton:active {
+  transform: translate(-50%, -50%) scale(0.98);
+}
