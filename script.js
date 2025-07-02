@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   startButton.addEventListener("click", () => {
     startButton.style.display = "none";
+    document.getElementById("logo").style.display = "block";
 
     // Load lines from lines.txt
     fetch("src/lines.txt")
