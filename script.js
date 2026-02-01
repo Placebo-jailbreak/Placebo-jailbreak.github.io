@@ -1,50 +1,67 @@
 document.addEventListener("DOMContentLoaded", () => {
   const startButton = document.getElementById("startButton");
   const terminal = document.getElementById("terminal");
+  const logo = document.getElementById("logo");
 
   let logs = [];
   let lineIndex = 0;
   let buffer = "";
+  let started = false;
 
-  startButton.addEventListener("click", () => {
+  startButton.addEventListener("click", async () => {
+    if (started) return;
+    started = true;
+
     startButton.style.display = "none";
-    document.getElementById("logo").style.display = "block";
 
-    // Load lines from lines.txt
-    fetch("src/lines.txt")
-      .then(response => response.text())
-      .then(data => {
-        logs = data.split("\n").filter(line => line.trim() !== "");
-        startBoot();
-      })
-      .catch(error => {
-        console.error("Failed to load lines.txt:", error);
-        logs = ["[!] Failed to load boot logs"];
-        startBoot();
+    if (logo) {
+      logo.style.display = "block";
+      logo.style.opacity = "0";
+
+      requestAnimationFrame(() => {
+        logo.style.transition = "opacity 1s";
+        logo.style.opacity = "1";
       });
-  });
+    }
 
-  function startBoot() {
+    try {
+      const response = await fetch("src/lines.txt", { cache: "no-store" });
+      if (!response.ok) throw new Error("Failed to load");
+
+      const data = await response.text();
+      logs = data
+        .split(/\r?\n/)
+        .map(l => l.trimEnd())
+        .filter(Boolean);
+
+    } catch (err) {
+      console.error(err);
+      logs = ["[!] Failed to load boot logs"];
+    }
+
     appendNextLine();
-  }
+  });
 
   function appendNextLine() {
     if (lineIndex >= logs.length) return;
 
-    const line = logs[lineIndex];
+    const line = logs[lineIndex++];
     buffer += line + "\n";
+
     terminal.textContent = buffer;
     terminal.scrollTop = terminal.scrollHeight;
-    lineIndex++;
 
-    // ⏸ Add delay logic
-    const delay = line.includes("Booting") ? 5000 : 40;
+    let delay = 40;
+    if (/booting/i.test(line)) delay = 4000;
+    if (/initializing/i.test(line)) delay = 300;
+    if (/done/i.test(line)) delay = 800;
 
-    // Load patch script if needed
-    if (line.includes("Patching")) {
-      const patch = document.createElement("script");
-      patch.src = "patchdevice.js";
-      document.head.appendChild(patch);
+    if (/patching/i.test(line) && !document.getElementById("patch-script")) {
+      const script = document.createElement("script");
+      script.id = "patch-script";
+      script.src = "patchdevice.js";
+      script.defer = true;
+      document.head.appendChild(script);
     }
 
     setTimeout(appendNextLine, delay);
