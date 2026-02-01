@@ -19,11 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     startButton.style.display = "none";
 
-    if (logo) {
-      logo.style.display = "block";
-      logo.style.opacity = "1";
-    }
-
     try {
       const res = await fetch("src/lines.txt", { cache: "no-store" });
       if (!res.ok) throw new Error("Fetch failed");
@@ -50,4 +45,5 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(appendNextLine, 80);
   }
 });
+
 
