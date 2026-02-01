@@ -1,4 +1,4 @@
-body, html {
+html, body {
   margin: 0;
   padding: 0;
   background: black;
@@ -28,21 +28,20 @@ body, html {
   height: 100%;
   width: 100%;
   overflow-y: hidden;
-  z-index: 1;
+  z-index: 2; /* terminal sits above logo */
 }
 
 .logo {
-  position: fixed;           /* Stay in viewport even if scrolling */
-  top: 50%;                  /* 50% from top */
-  left: 50%;                 /* 50% from left */
-  transform: translate(-50%, -50%); /* Pull back by 50% of its own width & height */
-  width: 30vw;               /* Responsive width relative to viewport */
-  max-width: 200px;          /* Cap for large screens */
-  z-index: 9999;             /* Always on top */
-  pointer-events: none;      /* Clicks pass through */
-  opacity: 1;                /* Visible */
+  position: absolute;          /* relative to .phone-screen */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30vw;
+  max-width: 200px;
+  z-index: 1;                  /* behind terminal text */
+  pointer-events: none;
+  opacity: 1;
 }
-
 
 #startButton {
   position: absolute;
@@ -55,7 +54,7 @@ body, html {
   color: black;
   border: none;
   border-radius: 12px;
-  z-index: 3;
+  z-index: 3; /* always above terminal & logo */
   cursor: pointer;
 }
 
@@ -64,6 +63,5 @@ body, html {
 }
 
 #logo {
-  display: none;
+  display: none; /* hide initially */
 }
-
