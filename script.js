@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     terminal.textContent = buffer;
     terminal.scrollTop = terminal.scrollHeight;
 
-    setTimeout(appendNextLine, 40);
+    setTimeout(appendNextLine, 80);
   }
 });
+
